@@ -1,0 +1,22 @@
+-- 05 - Identifying Stuck Inventory with Long Aging + Low Sales
+-- Purpose: Flag products with extended aging and low sell-through as priority candidates for liquidation or promotion.
+
+WITH inventory_metrics AS (
+  SELECT
+    product_id,
+    AVG(inventory_age_days) AS avg_age,
+    SAFE_DIVIDE(SUM(is_sold), COUNT(*)) AS sell_through_rate
+  FROM `project-b8fea081-550e-474f-81d.analytics.fct_inventory`
+  GROUP BY product_id
+)
+SELECT
+  p.product_name,
+  p.category,
+  avg_age,
+  sell_through_rate
+FROM inventory_metrics i
+JOIN `project-b8fea081-550e-474f-81d.analytics.dim_product` p
+  ON i.product_id = p.product_id
+WHERE avg_age > 90
+  AND sell_through_rate < 0.3
+ORDER BY avg_age DESC;
