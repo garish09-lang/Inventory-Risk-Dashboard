@@ -65,12 +65,12 @@ Raw data is not included in this repository.
 
 All analytical logic is implemented in BigQuery SQL and organized as follows:
 
-File	                                    Description
-01_inventory_aging_buckets.sql	       Inventory aging bucket distribution
-02_bottom_20_sell_through.sql	         Bottom-performing products by sell-through
-03_inventory_vs_revenue.sql	           Inventory exposure vs revenue contribution
-04_weekly_sell_through_trend.sql	     Weekly sell-through trend analysis
-05_stuck_inventory_candidates.sql	     Identification of high-risk SKUs
+File	                                    
+01_inventory_aging_buckets.sql	       
+02_bottom_20_sell_through.sql	      
+03_inventory_vs_revenue.sql	          
+04_weekly_sell_through_trend.sql	     
+05_stuck_inventory_candidates.sql	     
 
 ## Power BI Dashboard
 
@@ -78,7 +78,7 @@ The Power BI report presents the analysis across four views:
 
 ### 1. Inventory Risk Overview
 
-- -Executive KPI summary (Revenue, Units in Stock, Sell-Through %, 90+ Day Inventory)
+- Executive KPI summary (Revenue, Units in Stock, Sell-Through %, 90+ Day Inventory)
 
 - Category-level sell-through and inventory concentration
 
