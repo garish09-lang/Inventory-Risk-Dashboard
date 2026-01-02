@@ -2,9 +2,9 @@
 
 BigQuery SQL · Power BI
 
-Overview
+## Overview
 
-This project analyzes inventory aging, sell-through efficiency, and revenue concentration to identify operational risk and slow-moving stock. The objective is to surface where inventory risk is accumulating, which products are driving or lagging revenue, and where corrective action (promotion, liquidation, rebalancing) may be required.
+This project analyzes inventory aging, sell-through efficiency, and revenue concentration to identify operational risk and slow-moving stock. The objective is to identify where inventory risk is accumulating, which products are driving or lagging revenue, and where corrective action (such as promotion, liquidation, or rebalancing) may be required.
 
 The analysis combines BigQuery SQL for data preparation and metric calculation with Power BI for interactive, drill-through visualization.
 
@@ -23,7 +23,7 @@ Data Sources
 The analysis is built on the following analytical tables:
 
 fct_inventory
-Inventory item-level data including receipt date, aging, and sold status
+Inventory item-level data, including receipt date, aging, and sold status
 
 fct_sales
 Transactional sales data used to compute revenue and sell-through
