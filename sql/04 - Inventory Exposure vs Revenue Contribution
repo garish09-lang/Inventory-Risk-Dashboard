@@ -1,0 +1,29 @@
+-- 04 - Inventory Exposure vs Revenue Contribution
+-- Purpose: Compare inventory exposure against revenue contribution to highlight imbalance and risk by category.
+
+WITH inventory_summary AS (
+  SELECT
+    product_id,
+    COUNT(*) AS inventory_units,
+    SUM(is_sold) AS units_sold
+  FROM `project-b8fea081-550e-474f-81d.analytics.fct_inventory`
+  GROUP BY product_id
+),
+revenue_summary AS (
+  SELECT
+    product_id,
+    SUM(sale_price) AS total_revenue
+  FROM `project-b8fea081-550e-474f-81d.analytics.fct_sales`
+  GROUP BY product_id
+)
+SELECT
+  p.category,
+  SUM(i.inventory_units) AS inventory_units,
+  SUM(r.total_revenue) AS revenue
+FROM inventory_summary i
+LEFT JOIN revenue_summary r
+  ON i.product_id = r.product_id
+JOIN `project-b8fea081-550e-474f-81d.analytics.dim_product` p
+  ON i.product_id = p.product_id
+GROUP BY p.category
+ORDER BY inventory_units DESC;
