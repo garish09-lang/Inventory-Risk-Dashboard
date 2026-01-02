@@ -1,0 +1,25 @@
+-- 03 - Bottom 20% Products by Sell Through
+-- Purpose: Identify the bottom 20% of products by sell-through rate to surface underperforming SKUs.
+
+WITH product_sell_through AS (
+  SELECT
+    p.product_id,
+    p.category,
+    COUNT(*) AS total_units,
+    SUM(i.is_sold) AS units_sold,
+    SAFE_DIVIDE(SUM(i.is_sold), COUNT(*)) AS sell_through_rate
+  FROM `project-b8fea081-550e-474f-81d.analytics.fct_inventory` i
+  JOIN `project-b8fea081-550e-474f-81d.analytics.dim_product` p
+    ON i.product_id = p.product_id
+  GROUP BY p.product_id, p.category
+),
+ranked_products AS (
+  SELECT
+    *,
+    NTILE(5) OVER (ORDER BY sell_through_rate) AS performance_bucket
+  FROM product_sell_through
+)
+SELECT *
+FROM ranked_products
+WHERE performance_bucket = 1
+ORDER BY sell_through_rate;
