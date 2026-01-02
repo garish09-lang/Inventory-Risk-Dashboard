@@ -1,5 +1,4 @@
-
--- Inventory Aging Buckets + Risk Exposure
+-- Inventory Aging Buckets
 WITH inventory_base AS (
   SELECT
     i.inventory_item_id,
