@@ -1,5 +1,5 @@
 -- 01_inventory_aging_buckets.sql
--- -- Purpose: Bucket unsold inventory into aging ranges (0–30, 31–60, 61–90, 90+)
+-- Purpose: Bucket unsold inventory into aging ranges (0–30, 31–60, 61–90, 90+)
 
 WITH inventory_base AS (
   SELECT
