@@ -1,4 +1,4 @@
-Inventory Risk & Revenue Concentration Analysis
+# Inventory Risk & Revenue Concentration Analysis
 
 BigQuery SQL · Power BI
 
