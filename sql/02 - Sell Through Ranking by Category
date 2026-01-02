@@ -1,0 +1,21 @@
+-- 02 Sell-through Ranking by Category
+-- Purpose: Measure sell-through performance by category to identify slow-moving product groups.
+
+
+WITH category_performance AS (
+  SELECT
+    p.category,
+    COUNT(*) AS total_units,
+    SUM(i.is_sold) AS units_sold,
+    SAFE_DIVIDE(SUM(i.is_sold), COUNT(*)) AS sell_through_rate
+  FROM `project-b8fea081-550e-474f-81d.analytics.fct_inventory` i
+  JOIN `project-b8fea081-550e-474f-81d.analytics.dim_product` p
+    ON i.product_id = p.product_id
+  GROUP BY p.category
+)
+SELECT
+  category,
+  sell_through_rate,
+  RANK() OVER (ORDER BY sell_through_rate DESC) AS sell_through_rank
+FROM category_performance
+ORDER BY sell_through_rank;
